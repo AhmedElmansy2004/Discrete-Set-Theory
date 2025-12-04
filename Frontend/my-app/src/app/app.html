@@ -1,0 +1,17 @@
+<div class="content">
+
+  <div class="universal">
+    <button class="size-button" (click)="decreaseNumber(1)">{{"<"}}</button>
+    @if(numOfUElements != 0){
+      <div class="brackets">{{ "{" }}</div>
+        @for(i of getRange(numOfUElements); track i){
+          <input type="text" class="set-elements" [(ngModel)]="universalSet[i]">
+        }
+      <div class="brackets">{{ "}" }}</div>
+    }
+    @else{
+      <div class="phi">𝜙</div>
+    }
+    <button class="size-button" (click)="increaseNumber(1)">{{">"}}</button>
+  </div>
+</div>

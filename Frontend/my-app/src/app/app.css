@@ -1,0 +1,90 @@
+/* ============================
+   Container
+============================ */
+.content {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ============================
+   Universal set wrapper
+============================ */
+.universal {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* space between elements */
+    background-color: #f9f9f9;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ============================
+   Buttons
+============================ */
+.size-button {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.size-button:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+/* ============================
+   Brackets
+============================ */
+.brackets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* ============================
+   Input elements
+============================ */
+.set-elements {
+    min-width: 40px;
+    padding: 6px 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    width: auto; /* works with ngModel or auto-resize */
+}
+
+.set-elements:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.4);
+}
+
+/* ============================
+   Phi display
+============================ */
+.phi {
+    font-size: 36px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: #555;
+}
