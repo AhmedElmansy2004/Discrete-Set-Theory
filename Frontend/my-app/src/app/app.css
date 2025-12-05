@@ -3,18 +3,36 @@
 ============================ */
 .content {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    gap: 40px;
     margin-top: 50px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    caret-color: transparent;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* ============================
    Universal set wrapper
 ============================ */
+
+.universal-section{
+    display: flex;
+    justify-content: space-between;
+
+}
+
 .universal {
     display: flex;
     align-items: center;
-    gap: 10px; /* space between elements */
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
     background-color: #f9f9f9;
     padding: 15px 20px;
     border-radius: 12px;
@@ -25,8 +43,8 @@
    Buttons
 ============================ */
 .size-button {
-    width: 36px;
-    height: 36px;
+    width: 80px;
+    height: auto;
     font-size: 18px;
     font-weight: bold;
     background-color: #4CAF50;
@@ -55,11 +73,17 @@
     font-weight: bold;
 }
 
+.list-name{
+    font-size: 32px;
+    font-weight: bold;
+}
+
 /* ============================
    Input elements
 ============================ */
 .set-elements {
     min-width: 40px;
+    max-width: 90px;
     padding: 6px 10px;
     font-size: 16px;
     border: 2px solid #ccc;
@@ -87,4 +111,30 @@
     width: 36px;
     height: 36px;
     color: #555;
+}
+
+.numberOfsets{
+    display: flex;
+    gap: 20px;
+
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.numberOfsets input{
+    min-width: 20px;
+    max-width: 30px;
+    padding: 6px 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    width: auto; /* works with ngModel or auto-resize */
+}
+
+.numberOfsets input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 4px rgba(76, 175, 80, 0.4);
 }

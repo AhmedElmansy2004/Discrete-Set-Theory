@@ -1,17 +1,56 @@
 <div class="content">
 
-  <div class="universal">
-    <button class="size-button" (click)="decreaseNumber(1)">{{"<"}}</button>
-    @if(numOfUElements != 0){
-      <div class="brackets">{{ "{" }}</div>
-        @for(i of getRange(numOfUElements); track i){
-          <input type="text" class="set-elements" [(ngModel)]="universalSet[i]">
-        }
-      <div class="brackets">{{ "}" }}</div>
-    }
-    @else{
-      <div class="phi">𝜙</div>
-    }
-    <button class="size-button" (click)="increaseNumber(1)">{{">"}}</button>
+  <div class="universal-section">
+    <button class="size-button" (click)="decreaseNumber(0)">{{"<"}}</button>
+    <div class="universal">
+      <label class="list-name">U = </label>
+      @if(numOfUElements != 0){
+        <div class="brackets">{{ "{" }}</div>
+          @for(i of getRange(numOfUElements); track i){
+            <input type="text" class="set-elements" [(ngModel)]="universalSet[i]">
+          }
+        <div class="brackets">{{ "}" }}</div>
+      }
+      @else{
+        <div class="phi">𝜙</div>
+      }
+    </div>
+    <button class="size-button" (click)="increaseNumber(0)">{{">"}}</button>
   </div>
+
+  <div class="numberOfsets">
+    <div>Enter number of Subsets:</div>
+    <input type="number" [(ngModel)]="numberOfSubsets">
+  </div>
+
+  @for(i of getRange(numberOfSubsets); track i){
+    <div class="universal-section">
+    <button class="size-button" (click)="decreaseNumber(2)">{{"<"}}</button>
+    <div class="universal">
+      <label class="list-name">S<sub>{{i+1}}</sub> = </label>
+      @if(numOfUElements != 0){
+        <div class="brackets">{{ "{" }}</div>
+          @for(j of getRange(numOfUElements); track j){
+            <select class="set-elements" [(ngModel)]="available">
+              @for(k of getRange(numberOfSubsets); track k){
+                <option value="" (click)="setAvailable(k)">{{k}}</option>
+              }
+            </select>
+          }
+        <div class="brackets">{{ "}" }}</div>
+      }
+      @else{
+        <div class="phi">𝜙</div>
+      }
+    </div>
+    <button class="size-button" (click)="increaseNumber(2)">{{">"}}</button>
+  </div>
+  }
 </div>
+
+
+<!--To Do-->
+
+<!--
+fix increamenting/decreamenting logic
+-->
