@@ -1,7 +1,7 @@
 <div class="content">
 
   <div class="universal-section">
-    <button class="size-button" (click)="decreaseNumber(0)">{{"<"}}</button>
+    <button class="size-button" (click)="decreaseNumber(-1)">{{"<"}}</button>
     <div class="universal">
       <label class="list-name">U = </label>
       @if(numOfUElements != 0){
@@ -15,25 +15,25 @@
         <div class="phi">𝜙</div>
       }
     </div>
-    <button class="size-button" (click)="increaseNumber(0)">{{">"}}</button>
+    <button class="size-button" (click)="increaseNumber(-1)">{{">"}}</button>
   </div>
 
   <div class="numberOfsets">
     <div>Enter number of Subsets:</div>
-    <input type="number" [(ngModel)]="numberOfSubsets">
+    <input type="number" [(ngModel)]="numberOfSubsets" (ngModelChange)="onSubsetsChanged()">
   </div>
 
   @for(i of getRange(numberOfSubsets); track i){
     <div class="universal-section">
-    <button class="size-button" (click)="decreaseNumber(2)">{{"<"}}</button>
+    <button class="size-button" (click)="decreaseNumber(i)">{{"<"}}</button>
     <div class="universal">
       <label class="list-name">S<sub>{{i+1}}</sub> = </label>
-      @if(numOfUElements != 0){
+      @if(numOfSubsetElements[i] != 0){
         <div class="brackets">{{ "{" }}</div>
-          @for(j of getRange(numOfUElements); track j){
+          @for(j of getRange(numOfSubsetElements[i]); track j){
             <select class="set-elements" [(ngModel)]="available">
               @for(k of getRange(numberOfSubsets); track k){
-                <option value="" (click)="setAvailable(k)">{{k}}</option>
+                <option value="" (click)="setAvailable(k)">{{universalSet[k]}}</option>
               }
             </select>
           }
@@ -43,9 +43,51 @@
         <div class="phi">𝜙</div>
       }
     </div>
-    <button class="size-button" (click)="increaseNumber(2)">{{">"}}</button>
+    <button class="size-button" (click)="increaseNumber(i)">{{">"}}</button>
   </div>
   }
+
+  <div class="numberOfsets">
+    <label class="list-name">Choose an operation: </label>
+    <select [(ngModel)]="selectedOperation" class="set-operation">
+      <option value="" disabled selected>Operation...</option>
+      <option value="union">Union</option>
+      <option value="intersection">Intersection</option>
+      <option value="complement">Complement</option>
+      <option value="difference">Difference</option>
+      <option value="cardinality">Get Set Cardinality</option>
+      <option value="print">Get Set</option>
+    </select>
+  </div>
+
+  @if(selectedOperation == "union" || selectedOperation == "intersection" || selectedOperation =="difference"){
+    <div class="binary-operation">
+      <label class="list-name">Choose set 1: </label>
+      <select class="set-elements" [(ngModel)]="available">
+          @for(k of getRange(numberOfSubsets); track k){
+            <option value="">S<sub>{{k+1}}</sub></option>
+          }
+      </select>
+      <label class="list-name">Choose set 2: </label>
+      <select class="set-elements" [(ngModel)]="available">
+          @for(k of getRange(numberOfSubsets); track k){
+            <option value="">S<sub>{{k+1}}</sub></option>
+          }
+      </select>
+    </div>
+    
+  }
+  @else if(selectedOperation != ""){
+    <div class="unary-operation">
+      <label class="list-name">Choose set: </label>
+        <select class="set-elements" [(ngModel)]="available">
+          @for(k of getRange(numberOfSubsets); track k){
+            <option value="">S<sub>{{k+1}}</sub></option>
+          }
+        </select>
+    </div>
+  }
+  
 </div>
 
 
