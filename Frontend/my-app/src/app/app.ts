@@ -12,7 +12,16 @@ export class App {
   protected readonly title = signal('my-app');
 
   numOfUElements: number = 2;
-  universalSet: string[][] = [];
+  universalSet: string[] = [];
+  numOfSubsetElements: number[] = [];
+  numberOfSubsets: number = 0;
+  subsets: string[][] = [];
+  available: string[] = [...this.universalSet];
+  selectedOperation: string = "";
+
+  onSubsetsChanged() {
+    this.numOfSubsetElements = Array(this.numberOfSubsets).fill(0);
+  }
 
   getRange(n: number) {
     return Array.from({length: n}, (_, i) => i);
@@ -20,12 +29,13 @@ export class App {
 
   increaseNumber(count: number){
     switch (count){
-      case 1:
+      case -1:
         this.numOfUElements++;
         console.log(this.numOfUElements)
         break;
 
       default:
+        if(this.numOfSubsetElements[count] < this.numOfUElements) this.numOfSubsetElements[count]++;
         break;
     }
 
@@ -35,13 +45,23 @@ export class App {
 
   decreaseNumber(count: number){
     switch (count){
-      case 1:
-        this.numOfUElements--;
+      case -1:
+        if(this.numOfUElements > 0) this.numOfUElements--;
         break;
 
       default:
+        if(this.numOfSubsetElements[count] > 0) this.numOfSubsetElements[count]--;
         break;
     }
 
+  }
+
+  setAvailable(index: number){
+    this.available.splice(index, 1);
+  }
+
+  resetAvailable(): string{
+    this.available = [...this.universalSet];
+    return "";
   }
 }
