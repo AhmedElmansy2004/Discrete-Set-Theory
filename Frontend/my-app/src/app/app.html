@@ -32,7 +32,7 @@
         <div class="brackets">{{ "{" }}</div>
           @for(j of getRange(numOfSubsetElements[i]); track j){
             <select class="set-elements" [(ngModel)]="available">
-              @for(k of getRange(numberOfSubsets); track k){
+              @for(k of getRange(numOfUElements); track k){
                 <option value="" (click)="setAvailable(k)">{{universalSet[k]}}</option>
               }
             </select>

@@ -20,7 +20,7 @@ export class App {
   selectedOperation: string = "";
 
   onSubsetsChanged() {
-    this.numOfSubsetElements = Array(this.numberOfSubsets).fill(1);
+    this.numOfSubsetElements = Array(this.numberOfSubsets).fill(0);
   }
 
   getRange(n: number) {
