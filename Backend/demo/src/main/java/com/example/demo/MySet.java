@@ -43,7 +43,7 @@ public class MySet {
     }
 
     public int difference(int bitRepresentation1,int bitRepresentation2){
-        return ~(bitRepresentation1) & bitRepresentation2;
+        return ~(bitRepresentation1) & bitRepresentation2; // bitRepresentation2 - bitRepresentation1
     }
 
     public int getCardinality(int bitRepresentation,int len_Of_Universal_Set){
