@@ -70,10 +70,17 @@ public class MySet {
 
     //handle phi
     public void printSet(){
-        for(int i = 0; i < this.universalSet.length; i++)
-            if(Bit.getBit(bitRepresentation, i) == 1)
+        String terminate;
+        System.out.print("{");
+        for(int i = 0; i < this.universalSet.length; i++){
+            if(Bit.getBit(bitRepresentation, i) == 1){
                 System.out.print(universalSet[i]);
-
+                System.out.print((i == this.universalSet.length)? "": ", ");
+            }
+            
+        }
+                
+        System.out.print("}");
         System.out.println();
     }
 
