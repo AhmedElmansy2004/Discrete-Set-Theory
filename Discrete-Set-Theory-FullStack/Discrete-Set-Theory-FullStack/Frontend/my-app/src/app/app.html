@@ -1,0 +1,123 @@
+<div class="content">
+  <h1>Discrete Set Theory Operations</h1>
+
+  <!-- Universal Set Section -->
+  <div class="universal-section">
+    <button class="size-button" (click)="decreaseNumber(-1)">-</button>
+    <div class="universal">
+      <label class="list-name">U = </label>
+      @if(numOfUElements != 0){
+        <div class="brackets">{{ "{" }}</div>
+          @for(i of getRange(numOfUElements); track i){
+            <input type="text" class="set-elements" [(ngModel)]="universalSet[i]" placeholder="Element {{i+1}}">
+          }
+        <div class="brackets">{{ "}" }}</div>
+      }
+      @else{
+        <div class="phi">𝜙</div>
+      }
+    </div>
+    <button class="size-button" (click)="increaseNumber(-1)">+</button>
+    <button class="init-button" (click)="initializeUniversalSet()">Initialize U</button>
+  </div>
+
+  @if(isUniverseInitialized) {
+    <!-- Number of Subsets -->
+    <div class="numberOfsets">
+      <div>Enter number of Subsets:</div>
+      <input type="number" [(ngModel)]="numberOfSubsets" (ngModelChange)="onSubsetsChanged()" min="0">
+    </div>
+
+    <!-- Subsets -->
+    @for(i of getRange(numberOfSubsets); track i){
+      <div class="universal-section">
+        <button class="size-button" (click)="decreaseNumber(i)">-</button>
+        <div class="universal">
+          <label class="list-name">S<sub>{{i+1}}</sub> = </label>
+          @if(numOfSubsetElements[i] != 0){
+            <div class="brackets">{{ "{" }}</div>
+              @for(j of getRange(numOfSubsetElements[i]); track j){
+                <select class="set-elements" [(ngModel)]="subsets[i][j]" (ngModelChange)="onSubsetElementChange(i, j, subsets[i][j])">
+                  <option value="" disabled selected>Select...</option>
+                  @for(k of getRange(numOfUElements); track k){
+                    <option [value]="universalSet[k]">{{universalSet[k]}}</option>
+                  }
+                </select>
+              }
+            <div class="brackets">{{ "}" }}</div>
+          }
+          @else{
+            <div class="phi">𝜙</div>
+          }
+        </div>
+        <button class="size-button" (click)="increaseNumber(i)">+</button>
+      </div>
+    }
+
+    <!-- Operation Selection -->
+    <div class="numberOfsets operation-section">
+      <label class="list-name">Choose an operation: </label>
+      <select [(ngModel)]="selectedOperation" class="set-operation">
+        <option value="" disabled selected>Operation...</option>
+        <option value="union">Union</option>
+        <option value="intersection">Intersection</option>
+        <option value="complement">Complement</option>
+        <option value="difference">Difference</option>
+        <option value="cardinality">Get Set Cardinality</option>
+        <option value="print">Get Set Elements</option>
+      </select>
+    </div>
+
+    <!-- Binary Operations (Union, Intersection, Difference) -->
+    @if(selectedOperation == "union" || selectedOperation == "intersection" || selectedOperation =="difference"){
+      <div class="binary-operation">
+        <label class="list-name">Choose set 1: </label>
+        <select class="set-elements" [(ngModel)]="selectedSet1">
+          <option [value]="-1" disabled selected>Select...</option>
+          @for(k of getRange(numberOfSubsets); track k){
+            <option [value]="k">S<sub>{{k+1}}</sub></option>
+          }
+        </select>
+        <label class="list-name">Choose set 2: </label>
+        <select class="set-elements" [(ngModel)]="selectedSet2">
+          <option [value]="-1" disabled selected>Select...</option>
+          @for(k of getRange(numberOfSubsets); track k){
+            <option [value]="k">S<sub>{{k+1}}</sub></option>
+          }
+        </select>
+      </div>
+    }
+    <!-- Unary Operations (Complement, Cardinality, Print) -->
+    @else if(selectedOperation != ""){
+      <div class="unary-operation">
+        <label class="list-name">Choose set: </label>
+        <select class="set-elements" [(ngModel)]="selectedSet1">
+          <option [value]="-1" disabled selected>Select...</option>
+          @for(k of getRange(numberOfSubsets); track k){
+            <option [value]="k">S<sub>{{k+1}}</sub></option>
+          }
+        </select>
+      </div>
+    }
+
+    <!-- Execute Button -->
+    @if(selectedOperation != ""){
+      <div class="execute-section">
+        <button class="execute-button" (click)="executeOperation()">Execute Operation</button>
+      </div>
+    }
+
+    <!-- Result Display -->
+    @if(operationResult){
+      <div class="result-section">
+        <h2>Result:</h2>
+        <div class="result-text">{{operationResult}}</div>
+      </div>
+    }
+  }
+  @else {
+    <div class="warning-message">
+      <p>⚠️ Please initialize the universal set first!</p>
+    </div>
+  }
+</div>
